@@ -43,7 +43,9 @@ mkdir -p build
 
 # generate ssh-key
 echo "🔐 Generating ssh key pair at \"build/ssh-$hcloud_context\"."
-echo "${GREEN}$(ssh-keygen -t ed25519 -C "$hcloud_ssh" -f "build/$hcloud_ssh" -N "")${NOCOLOR}\n"
+echo "${GREEN}"
+ssh-keygen -t ed25519 -C "$hcloud_ssh" -f "build/$hcloud_ssh" -N ""
+echo "${NOCOLOR}\n"
 
 # add ssh-key to hcloud project
 echo "🔒 Uploading the public key to hcloud."
@@ -60,7 +62,7 @@ echo "${NOCOLOR}\n"
 
 
 # create master node
-echo "🎛 Creating the master node."
+echo "🎛  Creating the master node."
 echo "${GREEN}"
 hcloud server create --type cpx11 --name master-0 --image ubuntu-18.04 --ssh-key "$hcloud_ssh" --network "$hcloud_net" --location "$DATACENTER"
 echo "${NOCOLOR}\n"
